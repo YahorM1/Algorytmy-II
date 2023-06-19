@@ -1,0 +1,3 @@
+D:/Algorytmy-II/cmake-build-debug/CMakeFiles/Algorytmy-II.dir
+D:/Algorytmy-II/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Algorytmy-II/cmake-build-debug/CMakeFiles/rebuild_cache.dir

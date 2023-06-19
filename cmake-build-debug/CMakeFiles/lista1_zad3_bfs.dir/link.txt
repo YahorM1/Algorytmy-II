@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2022.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\lista1_zad3_bfs.dir/objects.a
+C:\MinGW\mingw64\bin\ar.exe qc CMakeFiles\lista1_zad3_bfs.dir/objects.a @CMakeFiles\lista1_zad3_bfs.dir\objects1.rsp
+C:\MinGW\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\lista1_zad3_bfs.dir/objects.a -Wl,--no-whole-archive -o lista1_zad3_bfs.exe -Wl,--out-implib,liblista1_zad3_bfs.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\lista1_zad3_bfs.dir\linklibs.rsp

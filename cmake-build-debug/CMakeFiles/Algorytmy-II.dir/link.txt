@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2022.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Algorytmy-II.dir/objects.a
+C:\MinGW\mingw64\bin\ar.exe qc CMakeFiles\Algorytmy-II.dir/objects.a @CMakeFiles\Algorytmy-II.dir\objects1.rsp
+C:\MinGW\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Algorytmy-II.dir/objects.a -Wl,--no-whole-archive -o Algorytmy-II.exe -Wl,--out-implib,libAlgorytmy-II.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Algorytmy-II.dir\linklibs.rsp
