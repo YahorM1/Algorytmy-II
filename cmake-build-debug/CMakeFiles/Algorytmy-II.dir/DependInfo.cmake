@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/Algorytmy-II/main.cpp" "CMakeFiles/Algorytmy-II.dir/main.cpp.obj" "gcc" "CMakeFiles/Algorytmy-II.dir/main.cpp.obj.d"
+  "D:/Algorytmy-II/projekt.cpp" "CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj" "gcc" "CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj.d"
   )
 
 # Targets to which this target links.

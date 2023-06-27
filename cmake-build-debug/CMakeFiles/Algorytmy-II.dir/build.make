@@ -68,28 +68,29 @@ include CMakeFiles/Algorytmy-II.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Algorytmy-II.dir/flags.make
 
-CMakeFiles/Algorytmy-II.dir/main.cpp.obj: CMakeFiles/Algorytmy-II.dir/flags.make
-CMakeFiles/Algorytmy-II.dir/main.cpp.obj: ../main.cpp
-CMakeFiles/Algorytmy-II.dir/main.cpp.obj: CMakeFiles/Algorytmy-II.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Algorytmy-II\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Algorytmy-II.dir/main.cpp.obj"
-	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Algorytmy-II.dir/main.cpp.obj -MF CMakeFiles\Algorytmy-II.dir\main.cpp.obj.d -o CMakeFiles\Algorytmy-II.dir\main.cpp.obj -c D:\Algorytmy-II\main.cpp
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: CMakeFiles/Algorytmy-II.dir/flags.make
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: CMakeFiles/Algorytmy-II.dir/includes_CXX.rsp
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: ../projekt.cpp
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: CMakeFiles/Algorytmy-II.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Algorytmy-II\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj"
+	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj -MF CMakeFiles\Algorytmy-II.dir\projekt.cpp.obj.d -o CMakeFiles\Algorytmy-II.dir\projekt.cpp.obj -c D:\Algorytmy-II\projekt.cpp
 
-CMakeFiles/Algorytmy-II.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Algorytmy-II.dir/main.cpp.i"
-	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Algorytmy-II\main.cpp > CMakeFiles\Algorytmy-II.dir\main.cpp.i
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Algorytmy-II.dir/projekt.cpp.i"
+	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Algorytmy-II\projekt.cpp > CMakeFiles\Algorytmy-II.dir\projekt.cpp.i
 
-CMakeFiles/Algorytmy-II.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Algorytmy-II.dir/main.cpp.s"
-	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Algorytmy-II\main.cpp -o CMakeFiles\Algorytmy-II.dir\main.cpp.s
+CMakeFiles/Algorytmy-II.dir/projekt.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Algorytmy-II.dir/projekt.cpp.s"
+	C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Algorytmy-II\projekt.cpp -o CMakeFiles\Algorytmy-II.dir\projekt.cpp.s
 
 # Object files for target Algorytmy-II
 Algorytmy__II_OBJECTS = \
-"CMakeFiles/Algorytmy-II.dir/main.cpp.obj"
+"CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj"
 
 # External object files for target Algorytmy-II
 Algorytmy__II_EXTERNAL_OBJECTS =
 
-Algorytmy-II.exe: CMakeFiles/Algorytmy-II.dir/main.cpp.obj
+Algorytmy-II.exe: CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj
 Algorytmy-II.exe: CMakeFiles/Algorytmy-II.dir/build.make
 Algorytmy-II.exe: CMakeFiles/Algorytmy-II.dir/linklibs.rsp
 Algorytmy-II.exe: CMakeFiles/Algorytmy-II.dir/objects1.rsp

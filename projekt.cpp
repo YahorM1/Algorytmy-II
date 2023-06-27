@@ -56,7 +56,7 @@ void displayAssignment(const Matrix& assignment, const vector<Krasnoludek>& kras
     for (int i = 0; i < assignment.size(); i++) {
         const Krasnoludek& krasnoludek = krasnoludki[i];
         const Zloze& zloze = zloza[assignment[i][0]];
-        cout << krasnoludek.imie << " -> Złoże " << zloze.nazwa << endl;
+        cout << krasnoludek.imie << " -> Zloze " << zloze.nazwa << endl;
     }
 }
 
@@ -312,37 +312,38 @@ int fordFulkerson(vector<vector<Edge>>& graph, const Vertex& source, const Verte
 
 
 int main() {
-    
+
+
    // Utworzenie listy krasnoludków
 vector<Krasnoludek> krasnoludki = {
-    {"Krasnal1", {{"złoto", 2}, {"węgiel", 5}, {"ruda miedzi", 3}}},
-    {"Krasnal2", {{"węgiel", 4}, {"złoto", 1}, {"ruda miedzi", 2}}},
-    {"Krasnal3", {{"ruda miedzi", 3}, {"węgiel", 2}, {"złoto", 4}}},
-    {"Krasnal4", {{"złoto", 3}, {"węgiel", 5}, {"ruda miedzi", 2}}},
-    {"Krasnal5", {{"złoto", 1}, {"ruda miedzi", 4}, {"węgiel", 3}}},
-    {"Krasnal6", {{"węgiel", 4}, {"ruda miedzi", 2}, {"złoto", 5}}},
-    {"Krasnal7", {{"ruda miedzi", 3}, {"złoto", 2}, {"węgiel", 4}}},
-    {"Krasnal8", {{"złoto", 4}, {"węgiel", 3}, {"ruda miedzi", 1}}},
-    {"Krasnal9", {{"złoto", 2}, {"ruda miedzi", 5}, {"węgiel", 4}}},
-    {"Krasnal10", {{"węgiel", 3}, {"złoto", 4}, {"ruda miedzi", 2}}},
-    {"Krasnal11", {{"ruda miedzi", 4}, {"złoto", 1}, {"węgiel", 3}}},
-    {"Krasnal12", {{"złoto", 3}, {"węgiel", 2}, {"ruda miedzi", 5}}},
-    {"Krasnal13", {{"złoto", 5}, {"ruda miedzi", 3}, {"węgiel", 2}}},
-    {"Krasnal14", {{"węgiel", 4}, {"złoto", 2}, {"ruda miedzi", 3}}},
-    {"Krasnal15", {{"ruda miedzi", 2}, {"węgiel", 5}, {"złoto", 3}}},
-    {"Krasnal16", {{"złoto", 1}, {"ruda miedzi", 3}, {"węgiel", 4}}},
-    {"Krasnal17", {{"złoto", 4}, {"węgiel", 2}, {"ruda miedzi", 3}}},
-    {"Krasnal18", {{"ruda miedzi", 5}, {"złoto", 3}, {"węgiel", 2}}},
-    {"Krasnal19", {{"węgiel", 3}, {"złoto", 4}, {"ruda miedzi", 2}}},
-    {"Krasnal20", {{"złoto", 2}, {"ruda miedzi", 3}, {"węgiel", 4}}}
+    {"Krasnal1", {{"zloto", 2}, {"wegiel", 5}, {"ruda miedzi", 3}}},
+    {"Krasnal2", {{"wegiel", 4}, {"zloto", 1}, {"ruda miedzi", 2}}},
+    {"Krasnal3", {{"ruda miedzi", 3}, {"wegiel", 2}, {"zloto", 4}}},
+    {"Krasnal4", {{"zloto", 3}, {"wegiel", 5}, {"ruda miedzi", 2}}},
+    {"Krasnal5", {{"zloto", 1}, {"ruda miedzi", 4}, {"wegiel", 3}}},
+    {"Krasnal6", {{"wegiel", 4}, {"ruda miedzi", 2}, {"zloto", 5}}},
+    {"Krasnal7", {{"ruda miedzi", 3}, {"zloto", 2}, {"wegiel", 4}}},
+    {"Krasnal8", {{"zloto", 4}, {"wegiel", 3}, {"ruda miedzi", 1}}},
+    {"Krasnal9", {{"zloto", 2}, {"ruda miedzi", 5}, {"wegiel", 4}}},
+    {"Krasnal10", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
+    {"Krasnal11", {{"ruda miedzi", 4}, {"zloto", 1}, {"wegiel", 3}}},
+    {"Krasnal12", {{"zloto", 3}, {"wegiel", 2}, {"ruda miedzi", 5}}},
+    {"Krasnal13", {{"zloto", 5}, {"ruda miedzi", 3}, {"wegiel", 2}}},
+    {"Krasnal14", {{"wegiel", 4}, {"zloto", 2}, {"ruda miedzi", 3}}},
+    {"Krasnal15", {{"ruda miedzi", 2}, {"wegiel", 5}, {"zloto", 3}}},
+    {"Krasnal16", {{"zloto", 1}, {"ruda miedzi", 3}, {"wegiel", 4}}},
+    {"Krasnal17", {{"zloto", 4}, {"wegiel", 2}, {"ruda miedzi", 3}}},
+    {"Krasnal18", {{"ruda miedzi", 5}, {"zloto", 3}, {"wegiel", 2}}},
+    {"Krasnal19", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
+    {"Krasnal20", {{"zloto", 2}, {"ruda miedzi", 3}, {"wegiel", 4}}}
     // Dodaj więcej krasnoludków...
 };
 
 
     // Utworzenie listy złóż
     vector<Zloze> zloza = {
-    {"złoto", 10},
-    {"węgiel", 10},
+    {"zloto", 10},
+    {"wegiel", 10},
     {"ruda miedzi", 10}
     // Dodaj więcej złóż...
 };
@@ -366,10 +367,10 @@ vector<Krasnoludek> krasnoludki = {
         }
     }
 
-    cout << "Macierz kosztów/przychodów:" << endl;
+    cout << "Macierz kosztow/przychodow:" << endl;
     displayMatrix(koszty);
 
-    cout << "\nPrzypisanie krasnoludków do złóż:" << endl;
+    cout << "\nPrzypisanie krasnoludkow do zloz:" << endl;
     Matrix assignment = hungarianAlgorithm(koszty);
     displayAssignment(assignment, krasnoludki, zloza);
 

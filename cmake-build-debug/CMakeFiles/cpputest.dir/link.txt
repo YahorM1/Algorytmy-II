@@ -1,0 +1,2 @@
+C:\MinGW\mingw64\bin\ar.exe qc libcpputest.a CMakeFiles/cpputest.dir/cpputest/src/CppUTest/TestHarness_c.cpp.obj CMakeFiles/cpputest.dir/cpputest/src/CppUTestExt/MockSupport.cpp.obj
+C:\MinGW\mingw64\bin\ranlib.exe libcpputest.a

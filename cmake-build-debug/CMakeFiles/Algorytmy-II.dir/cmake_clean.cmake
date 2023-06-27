@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "Algorytmy-II.exe"
   "Algorytmy-II.exe.manifest"
   "Algorytmy-II.pdb"
-  "CMakeFiles/Algorytmy-II.dir/main.cpp.obj"
-  "CMakeFiles/Algorytmy-II.dir/main.cpp.obj.d"
+  "CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj"
+  "CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj.d"
   "libAlgorytmy-II.dll.a"
 )
 
