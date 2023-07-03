@@ -13,4 +13,3 @@ target_link_libraries(runTests gtest gtest_main)
 
 add_executable(Algorytmy-II projekt.cpp)
 # add_executable(Algorytmy-II test/test_files/test.cpp)
-# add_executable(Algorytmy-II project.cpp project.h main.cpp)

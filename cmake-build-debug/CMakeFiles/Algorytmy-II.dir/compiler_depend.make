@@ -163,9 +163,15 @@ CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: ../projekt.cpp \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_deque.h \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/deque.tcc \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_queue.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/map \
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_tree.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_map.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_multimap.h \
   C:/MinGW/mingw64/include/c++/11.2.0/functional \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/refwrap.h \
-  C:/MinGW/mingw64/include/c++/11.2.0/bits/std_function.h
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/std_function.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/cmath \
+  C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h
 
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread.h:
@@ -444,6 +450,8 @@ C:/MinGW/mingw64/include/c++/11.2.0/bits/basic_ios.tcc:
 
 C:/MinGW/mingw64/include/c++/11.2.0/bits/ostream.tcc:
 
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h:
+
 C:/MinGW/mingw64/include/c++/11.2.0/istream:
 
 C:/MinGW/mingw64/include/c++/11.2.0/bits/istream.tcc:
@@ -494,6 +502,16 @@ C:/MinGW/mingw64/include/c++/11.2.0/bits/deque.tcc:
 
 C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_queue.h:
 
+C:/MinGW/mingw64/include/c++/11.2.0/map:
+
+C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_tree.h:
+
+C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_map.h:
+
+C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_multimap.h:
+
 C:/MinGW/mingw64/include/c++/11.2.0/functional:
 
 C:/MinGW/mingw64/include/c++/11.2.0/bits/refwrap.h:
+
+C:/MinGW/mingw64/include/c++/11.2.0/cmath:

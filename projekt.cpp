@@ -4,14 +4,16 @@
 #include <algorithm>
 #include <unordered_map>
 #include <queue>
+#include <map>
 #include <functional> // Dodane dołączenie nagłówka <functional>
+#include <cmath>
 
 using namespace std;
 
 // Struktura reprezentująca krasnoludka
 struct Krasnoludek {
     string imie;
-    unordered_map<string, int> umiejetnosci;  // Mapa umiejętności: nazwa umiejętności -> wartość umiejętności
+    map<string, int> umiejetnosci;  // Mapa umiejętności: nazwa umiejętności -> wartość umiejętności
 };
 
 // Struktura reprezentująca złóż
@@ -24,7 +26,32 @@ struct Zloze {
 struct Vertex {
     int id;
     string name;
+
+    double x, y;
+
+    bool operator==(const Vertex& other) const {
+        return id == other.id;
+    }
+    bool operator!=(const Vertex& other) const {
+        return id != other.id;
+    }
+    bool operator<(const Vertex& other) const {
+        return id < other.id;
+    }
+    bool operator>(const Vertex& other) const {
+        return id > other.id;
+    }
 };
+
+//enum MineTypes { Zloto, Wegiel, Ruda miedzi};
+//class Vertex{
+//public:
+//    MineTypes type;
+//    std::pair<float, float> position;
+//    Vertex (MineTypes type, float, px, float py) : type {type}, position{ std::make_pair(px, py)} {
+//
+//    }
+//};
 
 // Struktura reprezentująca krawędź
 struct Edge {
@@ -310,43 +337,101 @@ int fordFulkerson(vector<vector<Edge>>& graph, const Vertex& source, const Verte
     return maxFlow;
 }
 
+double euclidean(Vertex a, Vertex b){
+    return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2));
+}
+
+vector<Vertex> A_search_algorithm(Vertex& start, Vertex& goal, vector<vector<Edge>>& graph, const Matrix& koszty){
+    //priority_queue<Edge, vector<Edge>> pq;
+    map<Vertex, Vertex> came_from;
+    map<Vertex, double> cost_so_far;
+    priority_queue<pair<Vertex, double>> pq;
+    pq.push({start, 0});
+    came_from[start] = start;
+    cost_so_far[start] = 0;
+
+    while(!pq.empty()){
+        Vertex current = (Vertex &&) pq.top();
+        //pq.pop();
+        if(current == goal)
+            break;
+        for(Edge& edge : graph[current.id]){
+            Vertex next = edge.destination;
+            double new_cost = cost_so_far[current] + koszty[current.id][next.id];
+
+            if(cost_so_far.find(next) == cost_so_far.end() || new_cost < cost_so_far[next]){
+                cost_so_far[next] = new_cost;
+                double priority = new_cost + euclidean(next, goal);
+                pq.push({next, priority});
+                came_from[next] = current;
+            }
+        }
+    }
+    vector<Vertex> path;
+    Vertex current = goal;
+    while (current != start){
+        path.push_back(current);
+        current = came_from[current];
+    }
+    path.push_back(start);
+    reverse(path.begin(), path.end());
+
+    return path;
+}
+
 
 int main() {
 
 
-   // Utworzenie listy krasnoludków
-vector<Krasnoludek> krasnoludki = {
-    {"Krasnal1", {{"zloto", 2}, {"wegiel", 5}, {"ruda miedzi", 3}}},
-    {"Krasnal2", {{"wegiel", 4}, {"zloto", 1}, {"ruda miedzi", 2}}},
-    {"Krasnal3", {{"ruda miedzi", 3}, {"wegiel", 2}, {"zloto", 4}}},
-    {"Krasnal4", {{"zloto", 3}, {"wegiel", 5}, {"ruda miedzi", 2}}},
-    {"Krasnal5", {{"zloto", 1}, {"ruda miedzi", 4}, {"wegiel", 3}}},
-    {"Krasnal6", {{"wegiel", 4}, {"ruda miedzi", 2}, {"zloto", 5}}},
-    {"Krasnal7", {{"ruda miedzi", 3}, {"zloto", 2}, {"wegiel", 4}}},
-    {"Krasnal8", {{"zloto", 4}, {"wegiel", 3}, {"ruda miedzi", 1}}},
-    {"Krasnal9", {{"zloto", 2}, {"ruda miedzi", 5}, {"wegiel", 4}}},
-    {"Krasnal10", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
-    {"Krasnal11", {{"ruda miedzi", 4}, {"zloto", 1}, {"wegiel", 3}}},
-    {"Krasnal12", {{"zloto", 3}, {"wegiel", 2}, {"ruda miedzi", 5}}},
-    {"Krasnal13", {{"zloto", 5}, {"ruda miedzi", 3}, {"wegiel", 2}}},
-    {"Krasnal14", {{"wegiel", 4}, {"zloto", 2}, {"ruda miedzi", 3}}},
-    {"Krasnal15", {{"ruda miedzi", 2}, {"wegiel", 5}, {"zloto", 3}}},
-    {"Krasnal16", {{"zloto", 1}, {"ruda miedzi", 3}, {"wegiel", 4}}},
-    {"Krasnal17", {{"zloto", 4}, {"wegiel", 2}, {"ruda miedzi", 3}}},
-    {"Krasnal18", {{"ruda miedzi", 5}, {"zloto", 3}, {"wegiel", 2}}},
-    {"Krasnal19", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
-    {"Krasnal20", {{"zloto", 2}, {"ruda miedzi", 3}, {"wegiel", 4}}}
-    // Dodaj więcej krasnoludków...
-};
+    // Utworzenie listy krasnoludków
+//vector<Krasnoludek> krasnoludki = {
+//    {"Krasnal1", {{"zloto", 2}, {"wegiel", 5}, {"ruda miedzi", 3}}},
+//    {"Krasnal2", {{"wegiel", 4}, {"zloto", 1}, {"ruda miedzi", 2}}},
+//    {"Krasnal3", {{"ruda miedzi", 3}, {"wegiel", 2}, {"zloto", 4}}},
+//    {"Krasnal4", {{"zloto", 3}, {"wegiel", 5}, {"ruda miedzi", 2}}},
+//    {"Krasnal5", {{"zloto", 1}, {"ruda miedzi", 4}, {"wegiel", 3}}},
+//    {"Krasnal6", {{"wegiel", 4}, {"ruda miedzi", 2}, {"zloto", 5}}},
+//    {"Krasnal7", {{"ruda miedzi", 3}, {"zloto", 2}, {"wegiel", 4}}},
+//    {"Krasnal8", {{"zloto", 4}, {"wegiel", 3}, {"ruda miedzi", 1}}},
+//    {"Krasnal9", {{"zloto", 2}, {"ruda miedzi", 5}, {"wegiel", 4}}},
+//    {"Krasnal10", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
+//    {"Krasnal11", {{"ruda miedzi", 4}, {"zloto", 1}, {"wegiel", 3}}},
+//    {"Krasnal12", {{"zloto", 3}, {"wegiel", 2}, {"ruda miedzi", 5}}},
+//    {"Krasnal13", {{"zloto", 5}, {"ruda miedzi", 3}, {"wegiel", 2}}},
+//    {"Krasnal14", {{"wegiel", 4}, {"zloto", 2}, {"ruda miedzi", 3}}},
+//    {"Krasnal15", {{"ruda miedzi", 2}, {"wegiel", 5}, {"zloto", 3}}},
+//    {"Krasnal16", {{"zloto", 1}, {"ruda miedzi", 3}, {"wegiel", 4}}},
+//    {"Krasnal17", {{"zloto", 4}, {"wegiel", 2}, {"ruda miedzi", 3}}},
+//    {"Krasnal18", {{"ruda miedzi", 5}, {"zloto", 3}, {"wegiel", 2}}},
+//    {"Krasnal19", {{"wegiel", 3}, {"zloto", 4}, {"ruda miedzi", 2}}},
+//    {"Krasnal20", {{"zloto", 2}, {"ruda miedzi", 3}, {"wegiel", 4}}}
+//    // Dodaj więcej krasnoludków...
+//    };
 
+    vector<Krasnoludek> krasnoludki = {
+            {"Krasnal_1", {{"Zloto", 8}, {"Wegiel", 4}, {"Ruda miedzi", 2}}},
+            {"Krasnal_2", {{"Zloto", 6}, {"Wegiel", 3}, {"Ruda miedzi", 7}}},
+            {"Krasnal_3", {{"Zloto", 3}, {"Wegiel", 8}, {"Ruda miedzi", 1}}},
+            {"Krasnal_4", {{"Zloto", 3}, {"Wegiel", 3}, {"Ruda miedzi", 6}}},
+            {"Krasnal_5", {{"Zloto", 2}, {"Wegiel", 9}, {"Ruda miedzi", 1}}},
+            {"Krasnal_6", {{"Zloto", 3}, {"Wegiel", 4}, {"Ruda miedzi", 5}}},
+            {"Krasnal_7", {{"Zloto", 4}, {"Wegiel", 7}, {"Ruda miedzi", 2}}},
+            {"Krasnal_8", {{"Zloto", 1}, {"Wegiel", 5}, {"Ruda miedzi", 1}}},
+            {"Krasnal_9", {{"Zloto", 10}, {"Wegiel", 2}, {"Ruda miedzi", 5}}},
+            {"Krasnal_10", {{"Zloto", 6}, {"Wegiel", 3}, {"Ruda miedzi", 1}}},
+            {"Krasnal_11", {{"Zloto", 5}, {"Wegiel", 4}, {"Ruda miedzi", 9}}},
+            {"Krasnal_12", {{"Zloto", 2}, {"Wegiel", 5}, {"Ruda miedzi", 4}}},
+            {"Krasnal_13", {{"Zloto", 5}, {"Wegiel", 3}, {"Ruda miedzi", 7}}},
+            {"Krasnal_14", {{"Zloto", 8}, {"Wegiel", 4}, {"Ruda miedzi", 2}}}
+    };
 
     // Utworzenie listy złóż
     vector<Zloze> zloza = {
-    {"zloto", 10},
-    {"wegiel", 10},
-    {"ruda miedzi", 10}
-    // Dodaj więcej złóż...
-};
+            {"Zloto", 10},
+            {"Wegiel", 10},
+            {"Ruda miedzi", 10}
+            // Dodaj więcej złóż...
+    };
 
     // Utworzenie macierzy kosztów/przychodów
     int N = krasnoludki.size();
@@ -388,6 +473,28 @@ vector<Krasnoludek> krasnoludki = {
 
             int weight = koszty[i][j];
             addEdge(graph, krasnoludekVertex, zlozeVertex, weight);
+        }
+
+    }
+
+    cout << "Wyniki A*: " << endl;
+    for (int i = 0; i < krasnoludki.size(); ++i) {
+        for (int j = 0; j < zloza.size(); ++j) {
+            Vertex krasnoludekVertex;
+            krasnoludekVertex.id = i;
+            krasnoludekVertex.name = krasnoludki[i].imie;
+
+            Vertex zlozeVertex;
+            zlozeVertex.id = j + krasnoludki.size();
+            zlozeVertex.name = zloza[j].nazwa;
+
+            vector<Vertex> path = A_search_algorithm(krasnoludekVertex, zlozeVertex, graph, koszty);
+
+            //cout << "Krasnal: " << krasnoludki[i].imie << " -> Zloze: " << zloza[j].nazwa << endl;
+            for (const Vertex& vertex : path) {
+                cout << vertex.name << " ";
+            }
+            cout << endl;
         }
     }
 
