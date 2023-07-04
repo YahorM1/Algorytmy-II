@@ -31,15 +31,18 @@ int main()
 	//};
 
 	std::vector<mine_t> ores{
+	mine_t {MineTypes::gold, {0.f, 0.f}},
 	mine_t {MineTypes::gold, {3.f, 3.f}},
 	mine_t {MineTypes::gold, {1.f, 4.f}},
 	mine_t {MineTypes::coal, {2.f, 4.f}},
+	mine_t {MineTypes::coal, {5.f, 5.f}},
 	};
 
 	std::vector<dwarf_t> dwarfs{
 		{{1.f, 1.f}, {{MineTypes::gold, 5.f}, {MineTypes::coal, 2.f}}},
-		{{2.f, 1.f}, {{MineTypes::gold, 5.f}, {MineTypes::coal, 2.f}}},
 		{{2.f, 2.f}, {{MineTypes::gold, 3.f}, {MineTypes::coal, 5.f}}},
+		{{2.f, 1.f}, {{MineTypes::gold, 5.f}, {MineTypes::coal, 2.f}}},
+
 	};
 
 	//float ex[3][3] = { {16,14,68}, {59,32,85}, {63,54,43} };

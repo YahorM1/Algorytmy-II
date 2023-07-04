@@ -11,7 +11,7 @@
 
 class Hungarian
 {
-	size_t dwarfs_no;
+	size_t matrix_size;
 
 	float** cost_matrix;
 	float** original_costs;

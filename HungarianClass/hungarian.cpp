@@ -15,28 +15,28 @@
 
 void Hungarian::subtract_min_col()
 {
-	std::vector<float> mins(dwarfs_no, std::numeric_limits<float>::max());
+	std::vector<float> mins(matrix_size, std::numeric_limits<float>::max());
 
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (int col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (int col = 0; col < matrix_size; ++col)
 			if (cost_matrix[row][col] < mins[col])
 				mins[col] = cost_matrix[row][col];
 
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (int col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (int col = 0; col < matrix_size; ++col)
 			cost_matrix[row][col] -= mins[col];
 }
 
 
 void Hungarian::subtract_min_row()
 {
-	for (int row = 0; row < dwarfs_no; ++row) {
+	for (int row = 0; row < matrix_size; ++row) {
 		float row_min = std::numeric_limits<float>::max();
-		for (int col = 0; col < dwarfs_no; ++col)
+		for (int col = 0; col < matrix_size; ++col)
 			if (cost_matrix[row][col] < row_min)
 				row_min = cost_matrix[row][col];
 
-		for (int col = 0; col < dwarfs_no; ++col)
+		for (int col = 0; col < matrix_size; ++col)
 			cost_matrix[row][col] -= row_min;
 	}
 }
@@ -44,8 +44,8 @@ void Hungarian::subtract_min_row()
 
 void Hungarian::mark_starred_zeros()
 {
-	for (int row = 0; row < dwarfs_no; ++row)
-		for (int col = 0; col < dwarfs_no; ++col)
+	for (int row = 0; row < matrix_size; ++row)
+		for (int col = 0; col < matrix_size; ++col)
 			if (cost_matrix[row][col] == 0 && !row_cov[row] && !col_cov[col])
 			{
 				zeros_marks[row][col] = ZeroMark::starred;
@@ -57,12 +57,12 @@ void Hungarian::mark_starred_zeros()
 
 bool Hungarian::check_cover_is_min()
 {
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				col_cov[col] = true;
 
-	for (int col = 0; col < dwarfs_no; ++col)
+	for (int col = 0; col < matrix_size; ++col)
 		if (!col_cov[col])
 			return false;
 
@@ -72,8 +72,8 @@ bool Hungarian::check_cover_is_min()
 
 bool Hungarian::exists_uncovered_zero(size_t& rw, size_t& cl)
 {
-	for (size_t row = 0; row < dwarfs_no; ++row) {
-		for (size_t col = 0; col < dwarfs_no; ++col) {
+	for (size_t row = 0; row < matrix_size; ++row) {
+		for (size_t col = 0; col < matrix_size; ++col) {
 			if (cost_matrix[row][col] == 0 && !row_cov[row] && !col_cov[col]) {
 				rw = row, cl = col;
 				return true;
@@ -86,7 +86,7 @@ bool Hungarian::exists_uncovered_zero(size_t& rw, size_t& cl)
 
 bool Hungarian::zero_in_row(size_t rw, size_t& cl, ZeroMark mark_type)
 {
-	for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t col = 0; col < matrix_size; ++col)
 		if (zeros_marks[rw][col] == mark_type) {
 			cl = col;
 			return true;
@@ -97,7 +97,7 @@ bool Hungarian::zero_in_row(size_t rw, size_t& cl, ZeroMark mark_type)
 
 bool Hungarian::zero_in_col(size_t& rw, size_t cl, ZeroMark mark_type)
 {
-	for (size_t row = 0; row < dwarfs_no; ++row)
+	for (size_t row = 0; row < matrix_size; ++row)
 		if (zeros_marks[row][cl] == mark_type) {
 			rw = row;
 			return true;
@@ -130,8 +130,8 @@ void Hungarian::clear_covers()
 
 void Hungarian::erase_primes()
 {
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::primed)
 				zeros_marks[row][col] = ZeroMark::notmarked;
 }
@@ -140,8 +140,8 @@ void Hungarian::erase_primes()
 float Hungarian::find_min_uncovered()
 {
 	float minval = std::numeric_limits<float>::max();
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (!row_cov[row] && !col_cov[col])
 				if (cost_matrix[row][col] < minval)
 					minval = cost_matrix[row][col];
@@ -191,8 +191,8 @@ void Hungarian::update_costs_with_min()		// step six
 {
 	float minval = find_min_uncovered();
 
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col) {
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col) {
 			if (row_cov[row]) cost_matrix[row][col] += minval;
 			if (!col_cov[col]) cost_matrix[row][col] -= minval;
 		}
@@ -204,8 +204,8 @@ void Hungarian::update_costs_with_min()		// step six
 float Hungarian::calc_cost() const
 {
 	float cost = 0;
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				cost += original_costs[row][col];
 
@@ -217,8 +217,8 @@ std::vector<std::pair<int, int>> Hungarian::get_assignemnt()
 {
 	std::vector<std::pair<int, int>> assignment;
 
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				assignment.emplace_back(row, col);
 
@@ -271,32 +271,28 @@ std::vector<std::pair<int, int>> Hungarian::make_assignment()
 
 
 Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
-	: dwarfs_no{ dwarfs.size() }
+	: matrix_size{ std::max(dwarfs.size(), ores.size()) }
 {
-	if (dwarfs.size() != ores.size())
+	if (dwarfs.size() > ores.size())
 		throw std::exception("Dimensions mismatch");
 
-	row_cov.resize(dwarfs_no, false);
-	col_cov.resize(dwarfs_no, false);
+	row_cov.resize(matrix_size, false);
+	col_cov.resize(matrix_size, false);
 
-	zeros_marks = create_matrix(dwarfs_no, ZeroMark::notmarked);
-
-	//cost_matrix = create_matrix<float>(dwarfs_no,
-	//	[this](size_t row, size_t col) {
-	//		return (this->dwarfs[row].type == this->ores[col].type)
-	//			? this->min_cost
-	//			: this->max_cost;
-	//	});
+	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
 
 	float maxval = 0;
-	original_costs = create_matrix<float>(dwarfs_no,
-		[&dwarfs, &ores, &maxval](size_t row, size_t col) {
-			float val = dwarfs[row].skills[ores[col].type];
-	if (val > maxval) maxval = val;
-	return val;
+	original_costs = create_matrix<float>(matrix_size,
+		[&](size_t row, size_t col) {
+			float val = (row < dwarfs.size())
+				? dwarfs[row].skills[ores[col].type]
+				: 0;
+
+			if (val > maxval) maxval = val;
+			return val;
 		});
 
-	cost_matrix = create_matrix<float>(dwarfs_no,
+	cost_matrix = create_matrix<float>(matrix_size,
 		[this, maxval](size_t row, size_t col) {
 			return maxval - this->original_costs[row][col];
 		});
@@ -305,23 +301,25 @@ Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
 
 Hungarian::Hungarian(const std::set<std::pair<size_t, size_t>> & initial_assignement,
 	const std::vector<dwarf_t> & dwarfs, const std::vector<mine_t> & ores)
-	: dwarfs_no{ dwarfs.size() }
+	: matrix_size{ std::max(dwarfs.size(), ores.size()) }
 {
-	row_cov.resize(dwarfs_no, false);
-	col_cov.resize(dwarfs_no, false);
+	row_cov.resize(matrix_size, false);
+	col_cov.resize(matrix_size, false);
 
-	zeros_marks = create_matrix(dwarfs_no, ZeroMark::notmarked);
+	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
 
-	size_t n = dwarfs_no;
-	original_costs = create_matrix<float>(dwarfs_no,
-		[&initial_assignement, &dwarfs, &ores, n](size_t row, size_t col) {
+	size_t n = matrix_size;
+	original_costs = create_matrix<float>(matrix_size,
+		[&](size_t row, size_t col) {
 			std::set<std::pair<size_t, size_t>>::iterator it;
 			return (it = initial_assignement.find(std::make_pair(row, col))) == initial_assignement.end()
 				? std::numeric_limits<float>::infinity()
-				: distance(dwarfs[it->first].position, ores[it->second].position);
+				: it->first < dwarfs.size()
+					? distance(dwarfs[it->first].position, ores[it->second].position)
+					: 0.f;
 		});
 
-	cost_matrix = create_matrix<float>(dwarfs_no,
+	cost_matrix = create_matrix<float>(matrix_size,
 		[this](size_t row, size_t col) {
 			return this->original_costs[row][col];
 		});
@@ -329,19 +327,19 @@ Hungarian::Hungarian(const std::set<std::pair<size_t, size_t>> & initial_assigne
 }
 
 Hungarian::Hungarian(float matrix[], size_t size)
-	: dwarfs_no{ size }
+	: matrix_size{ size }
 {
-	row_cov.resize(dwarfs_no, false);
-	col_cov.resize(dwarfs_no, false);
+	row_cov.resize(matrix_size, false);
+	col_cov.resize(matrix_size, false);
 
-	zeros_marks = create_matrix(dwarfs_no, ZeroMark::notmarked);
+	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
 
-	original_costs = create_matrix<float>(dwarfs_no,
+	original_costs = create_matrix<float>(matrix_size,
 		[matrix, size](size_t row, size_t col) {
 			return matrix[row * size + col];
 		});
 
-	cost_matrix = create_matrix<float>(dwarfs_no,
+	cost_matrix = create_matrix<float>(matrix_size,
 		[this](size_t row, size_t col) {
 			return this->original_costs[row][col];
 		});
@@ -351,8 +349,8 @@ Hungarian::Hungarian(float matrix[], size_t size)
 std::set<std::pair<size_t, size_t>> Hungarian::get_zeros()
 {
 	std::set<std::pair<size_t, size_t>> zeros;
-	for (size_t row = 0; row < dwarfs_no; ++row)
-		for (size_t col = 0; col < dwarfs_no; ++col)
+	for (size_t row = 0; row < matrix_size; ++row)
+		for (size_t col = 0; col < matrix_size; ++col)
 			if (cost_matrix[row][col] == 0)
 				zeros.emplace(row, col);
 
@@ -370,13 +368,13 @@ float Hungarian::distance(std::pair<float, float> dwarf, std::pair<float, float>
 
 std::ostream& operator<< (std::ostream& os, Hungarian const& rhs)
 {
-	for (int i = 0; i < rhs.dwarfs_no; ++i)
+	for (int i = 0; i < rhs.matrix_size; ++i)
 	{
-		for (int j = 0; j < rhs.dwarfs_no; ++j)
+		for (int j = 0; j < rhs.matrix_size; ++j)
 			os << rhs.cost_matrix[i][j] << '\t';
 		os << '|';
 
-		for (int j = 0; j < rhs.dwarfs_no; ++j)
+		for (int j = 0; j < rhs.matrix_size; ++j)
 			os << (rhs.zeros_marks[i][j] == ZeroMark::notmarked ? ' '
 				: rhs.zeros_marks[i][j] == ZeroMark::starred ? '*'
 				: '\'') << ' ';
