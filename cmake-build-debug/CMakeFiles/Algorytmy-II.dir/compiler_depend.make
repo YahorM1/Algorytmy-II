@@ -171,7 +171,10 @@ CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: ../projekt.cpp \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/refwrap.h \
   C:/MinGW/mingw64/include/c++/11.2.0/bits/std_function.h \
   C:/MinGW/mingw64/include/c++/11.2.0/cmath \
-  C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h
+  C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/set \
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_set.h \
+  C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_multiset.h
 
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread.h:
@@ -229,6 +232,8 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h:
 C:/MinGW/mingw64/include/c++/11.2.0/bits/postypes.h:
 
 C:/MinGW/mingw64/include/c++/11.2.0/cwchar:
+
+C:/MinGW/mingw64/include/c++/11.2.0/set:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h:
 
@@ -515,3 +520,7 @@ C:/MinGW/mingw64/include/c++/11.2.0/functional:
 C:/MinGW/mingw64/include/c++/11.2.0/bits/refwrap.h:
 
 C:/MinGW/mingw64/include/c++/11.2.0/cmath:
+
+C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_set.h:
+
+C:/MinGW/mingw64/include/c++/11.2.0/bits/stl_multiset.h:

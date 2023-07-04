@@ -168,4 +168,7 @@ CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj: D:\Algorytmy-II\projekt.cpp \
  c:\mingw\mingw64\include\c++\11.2.0\bits\refwrap.h \
  c:\mingw\mingw64\include\c++\11.2.0\bits\std_function.h \
  c:\mingw\mingw64\include\c++\11.2.0\cmath \
- c:\mingw\mingw64\x86_64-w64-mingw32\include\math.h
+ c:\mingw\mingw64\x86_64-w64-mingw32\include\math.h \
+ c:\mingw\mingw64\include\c++\11.2.0\set \
+ c:\mingw\mingw64\include\c++\11.2.0\bits\stl_set.h \
+ c:\mingw\mingw64\include\c++\11.2.0\bits\stl_multiset.h

@@ -18,21 +18,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0c34c55f-69fd-4174-99f3-dc12d3d2e1d7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-2d9dedd1a3eef01d43eb.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-06-27T20-42-15-0185.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-runTests-Debug-95cd494dde2342cdd5b2.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Algorytmy-II.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Algorytmy-II.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/compiler_depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projekt.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/projekt.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +175,8 @@
       <workItem from="1687855691344" duration="3634000" />
       <workItem from="1687863091911" duration="664000" />
       <workItem from="1687863903013" duration="21188000" />
-      <workItem from="1688407668880" duration="6545000" />
+      <workItem from="1688407668880" duration="7141000" />
+      <workItem from="1688449275929" duration="3294000" />
     </task>
     <servers />
   </component>

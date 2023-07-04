@@ -7,6 +7,7 @@
 #include <map>
 #include <functional> // Dodane dołączenie nagłówka <functional>
 #include <cmath>
+#include <set>
 
 using namespace std;
 
@@ -341,28 +342,28 @@ double euclidean(Vertex a, Vertex b){
     return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2));
 }
 
-vector<Vertex> A_search_algorithm(Vertex& start, Vertex& goal, vector<vector<Edge>>& graph, const Matrix& koszty){
-    //priority_queue<Edge, vector<Edge>> pq;
+vector<Vertex> A_search_algorithm(Vertex& start, Vertex& goal, vector<vector<Edge>>& graph){
     map<Vertex, Vertex> came_from;
     map<Vertex, double> cost_so_far;
-    priority_queue<pair<Vertex, double>> pq;
-    pq.push({start, 0});
+    set<pair<Vertex, double>> open_list;
+    open_list.insert({start, 0});
     came_from[start] = start;
     cost_so_far[start] = 0;
 
-    while(!pq.empty()){
-        Vertex current = (Vertex &&) pq.top();
+    while(!open_list.empty()){
+        Vertex current = open_list.begin()->first;
+        open_list.erase(open_list.begin());
         //pq.pop();
         if(current == goal)
             break;
         for(Edge& edge : graph[current.id]){
             Vertex next = edge.destination;
-            double new_cost = cost_so_far[current] + koszty[current.id][next.id];
+            double newWeight = cost_so_far[current] + edge.weight;
 
-            if(cost_so_far.find(next) == cost_so_far.end() || new_cost < cost_so_far[next]){
-                cost_so_far[next] = new_cost;
-                double priority = new_cost + euclidean(next, goal);
-                pq.push({next, priority});
+            if(cost_so_far.find(next) == cost_so_far.end() || abs(newWeight - cost_so_far[next]) > 1e-6){
+                cost_so_far[next] = newWeight;
+                double neighborVertex = newWeight + euclidean(next, goal);
+                open_list.insert({next, neighborVertex});
                 came_from[next] = current;
             }
         }
@@ -462,24 +463,23 @@ int main() {
     // Dodawanie krawędzi do grafu na podstawie macierzy kosztów/przychodów
     vector<vector<Edge>> graph(krasnoludki.size() + zloza.size());
     for (int i = 0; i < krasnoludki.size(); ++i) {
-        for (int j = 0; j < zloza.size(); ++j) {
             Vertex krasnoludekVertex;
             krasnoludekVertex.id = i;
             krasnoludekVertex.name = krasnoludki[i].imie;
 
-            Vertex zlozeVertex;
-            zlozeVertex.id = j + krasnoludki.size();
-            zlozeVertex.name = zloza[j].nazwa;
+            for(int j = 0; j < zloza.size(); ++j){
+                Vertex zlozeVertex;
+                zlozeVertex.id = j + krasnoludki.size();
+                zlozeVertex.name = zloza[j].nazwa;
 
-            int weight = koszty[i][j];
-            addEdge(graph, krasnoludekVertex, zlozeVertex, weight);
-        }
-
+                int weight = koszty[i][j];
+                addEdge(graph, krasnoludekVertex, zlozeVertex, weight);
+            }
     }
 
-    cout << "Wyniki A*: " << endl;
-    for (int i = 0; i < krasnoludki.size(); ++i) {
-        for (int j = 0; j < zloza.size(); ++j) {
+    cout << " Wyniki A* " << endl;
+    for (int i = 0; i < krasnoludki.size(); ++i){
+        for (int j = 0; j < zloza.size(); ++j){
             Vertex krasnoludekVertex;
             krasnoludekVertex.id = i;
             krasnoludekVertex.name = krasnoludki[i].imie;
@@ -488,9 +488,8 @@ int main() {
             zlozeVertex.id = j + krasnoludki.size();
             zlozeVertex.name = zloza[j].nazwa;
 
-            vector<Vertex> path = A_search_algorithm(krasnoludekVertex, zlozeVertex, graph, koszty);
-
-            //cout << "Krasnal: " << krasnoludki[i].imie << " -> Zloze: " << zloza[j].nazwa << endl;
+            vector<Vertex> path = A_search_algorithm(krasnoludekVertex, zlozeVertex, graph);
+            cout << "Krasnal: " << krasnoludki[i].imie << " -> Zloze: " << zloza[j].nazwa << endl;
             for (const Vertex& vertex : path) {
                 cout << vertex.name << " ";
             }
