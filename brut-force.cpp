@@ -1,90 +1,3 @@
-//#include <vector>
-//#include <algorithm>
-//#include <numeric>
-//#include <unordered_map>
-//#include <cmath>
-//#include <limits>
-//#include <iostream>
-//
-//using namespace std;
-//
-//enum class MineTypes { gold = 1, copper, coal, iron, silver };
-//enum class ZeroMark { notmarked = 0, starred, primed };
-//
-//struct mine_t
-//{
-//    MineTypes type;
-//    pair<float, float> position;
-//};
-//
-//struct dwarf_t {
-//    pair<float, float> position;
-//    unordered_map<MineTypes, float> skills;
-//};
-//
-//float distance(pair<float, float> a, pair<float, float> b) {
-//    return sqrt(pow(a.first - b.first, 2) + pow(a.second - b.second, 2));
-//}
-//
-//pair<vector<int>, float> assignment_problem(vector<dwarf_t> dwarfs, vector<mine_t> mines) {
-//    int n = dwarfs.size();
-//    vector<vector<float>> cost_matrix(n, vector<float>(n));
-//
-//    for (int i = 0; i < n; ++i) {
-//        for (int j = 0; j < n; ++j) {
-//            cost_matrix[i][j] = distance(dwarfs[i].position, mines[j].position) / dwarfs[i].skills[mines[j].type];
-//        }
-//    }
-//
-//    vector<int> assignment(n);
-//    iota(assignment.begin(), assignment.end(), 0);
-//
-//    float min_cost = numeric_limits<float>::max();
-//    std::vector<int> best_assignment;
-//
-//    do {
-//        float cost = 0;
-//        for (int i = 0; i < n; ++i) {
-//            cost += cost_matrix[i][assignment[i]];
-//        }
-//        if (cost < min_cost) {
-//            min_cost = cost;
-//            best_assignment = assignment;
-//        }
-//    } while (std::next_permutation(assignment.begin(), assignment.end()));
-//
-//    return std::make_pair(best_assignment, min_cost);
-//}
-//
-//int main() {
-//    // Заполните ваши данные здесь
-//    std::vector<dwarf_t> dwarfs{
-//            {{1.f, 1.f}, {{MineTypes::gold, 5.f}, {MineTypes::coal, 2.f}}},
-//            {{2.f, 2.f}, {{MineTypes::gold, 3.f}, {MineTypes::coal, 5.f}}},
-//            {{2.f, 1.f}, {{MineTypes::gold, 5.f}, {MineTypes::coal, 2.f}}},
-//
-//    };
-//    std::vector<mine_t> ores{
-//            mine_t {MineTypes::gold, {0.f, 0.f}},
-//            mine_t {MineTypes::gold, {3.f, 3.f}},
-//            mine_t {MineTypes::gold, {1.f, 4.f}},
-//            mine_t {MineTypes::coal, {2.f, 4.f}},
-//            mine_t {MineTypes::coal, {5.f, 5.f}},
-//    };
-//
-//    std::pair<std::vector<int>, float> result = assignment_problem(dwarfs, ores);
-//
-//    cout << "Best assignment: ";
-//    for (int i : result.first) {
-//        cout << i << " ";
-//    }
-//    cout << "Cost: " << result.second << endl;
-//
-//    return 0;
-//}
-
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -168,7 +81,6 @@ std::pair<std::vector<int>, std::vector<int>> brute_force(std::vector<std::vecto
 }
 
 int main() {
-    // Example usage
 //    std::vector<std::vector<int>> cost_matrix = {
 //            {0, 0, 0, 3, 3, 6, 3, 3},
 //            {2, 2, 2, 0, 0, 3, 5, 9},
