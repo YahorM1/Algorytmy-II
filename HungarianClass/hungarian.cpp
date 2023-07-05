@@ -12,31 +12,30 @@
 #include "hungarian.h"
 
 
-
 void Hungarian::subtract_min_col()
 {
-	std::vector<float> mins(matrix_size, std::numeric_limits<float>::max());
+	std::vector<float> mins(ores_size, std::numeric_limits<float>::max());
 
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (int col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (int col = 0; col < ores_size; ++col)
 			if (cost_matrix[row][col] < mins[col])
 				mins[col] = cost_matrix[row][col];
 
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (int col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (int col = 0; col < ores_size; ++col)
 			cost_matrix[row][col] -= mins[col];
 }
 
 
 void Hungarian::subtract_min_row()
 {
-	for (int row = 0; row < matrix_size; ++row) {
+	for (int row = 0; row < ores_size; ++row) {
 		float row_min = std::numeric_limits<float>::max();
-		for (int col = 0; col < matrix_size; ++col)
+		for (int col = 0; col < ores_size; ++col)
 			if (cost_matrix[row][col] < row_min)
 				row_min = cost_matrix[row][col];
 
-		for (int col = 0; col < matrix_size; ++col)
+		for (int col = 0; col < ores_size; ++col)
 			cost_matrix[row][col] -= row_min;
 	}
 }
@@ -44,8 +43,8 @@ void Hungarian::subtract_min_row()
 
 void Hungarian::mark_starred_zeros()
 {
-	for (int row = 0; row < matrix_size; ++row)
-		for (int col = 0; col < matrix_size; ++col)
+	for (int row = 0; row < ores_size; ++row)
+		for (int col = 0; col < ores_size; ++col)
 			if (cost_matrix[row][col] == 0 && !row_cov[row] && !col_cov[col])
 			{
 				zeros_marks[row][col] = ZeroMark::starred;
@@ -57,12 +56,12 @@ void Hungarian::mark_starred_zeros()
 
 bool Hungarian::check_cover_is_min()
 {
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				col_cov[col] = true;
 
-	for (int col = 0; col < matrix_size; ++col)
+	for (int col = 0; col < ores_size; ++col)
 		if (!col_cov[col])
 			return false;
 
@@ -72,8 +71,8 @@ bool Hungarian::check_cover_is_min()
 
 bool Hungarian::exists_uncovered_zero(size_t& rw, size_t& cl)
 {
-	for (size_t row = 0; row < matrix_size; ++row) {
-		for (size_t col = 0; col < matrix_size; ++col) {
+	for (size_t row = 0; row < ores_size; ++row) {
+		for (size_t col = 0; col < ores_size; ++col) {
 			if (cost_matrix[row][col] == 0 && !row_cov[row] && !col_cov[col]) {
 				rw = row, cl = col;
 				return true;
@@ -86,7 +85,7 @@ bool Hungarian::exists_uncovered_zero(size_t& rw, size_t& cl)
 
 bool Hungarian::zero_in_row(size_t rw, size_t& cl, ZeroMark mark_type)
 {
-	for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t col = 0; col < ores_size; ++col)
 		if (zeros_marks[rw][col] == mark_type) {
 			cl = col;
 			return true;
@@ -97,7 +96,7 @@ bool Hungarian::zero_in_row(size_t rw, size_t& cl, ZeroMark mark_type)
 
 bool Hungarian::zero_in_col(size_t& rw, size_t cl, ZeroMark mark_type)
 {
-	for (size_t row = 0; row < matrix_size; ++row)
+	for (size_t row = 0; row < ores_size; ++row)
 		if (zeros_marks[row][cl] == mark_type) {
 			rw = row;
 			return true;
@@ -130,8 +129,8 @@ void Hungarian::clear_covers()
 
 void Hungarian::erase_primes()
 {
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::primed)
 				zeros_marks[row][col] = ZeroMark::notmarked;
 }
@@ -140,8 +139,8 @@ void Hungarian::erase_primes()
 float Hungarian::find_min_uncovered()
 {
 	float minval = std::numeric_limits<float>::max();
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (!row_cov[row] && !col_cov[col])
 				if (cost_matrix[row][col] < minval)
 					minval = cost_matrix[row][col];
@@ -191,8 +190,8 @@ void Hungarian::update_costs_with_min()		// step six
 {
 	float minval = find_min_uncovered();
 
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col) {
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col) {
 			if (row_cov[row]) cost_matrix[row][col] += minval;
 			if (!col_cov[col]) cost_matrix[row][col] -= minval;
 		}
@@ -204,12 +203,23 @@ void Hungarian::update_costs_with_min()		// step six
 float Hungarian::calc_cost() const
 {
 	float cost = 0;
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				cost += original_costs[row][col];
 
 	return cost;
+}
+
+std::vector<std::vector<float>> Hungarian::cost_matrix_to_vectors()
+{
+	std::vector<std::vector<float>> cost_original(dwarfs_size, std::vector<float>(ores_size));
+
+	for (int h = 0; h < dwarfs_size; ++h)
+		for (int w = 0; w < ores_size; ++w)
+			cost_original[h][w] = cost_matrix[h][w];
+	
+	return cost_original;
 }
 
 
@@ -217,8 +227,8 @@ std::vector<std::pair<int, int>> Hungarian::get_assignemnt()
 {
 	std::vector<std::pair<int, int>> assignment;
 
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (zeros_marks[row][col] == ZeroMark::starred)
 				assignment.emplace_back(row, col);
 
@@ -247,6 +257,7 @@ T** Hungarian::create_matrix(size_t size, std::function<T(size_t, size_t)>const&
 }
 
 
+
 std::vector<std::pair<int, int>> Hungarian::make_assignment()
 {
 	subtract_min_row();
@@ -271,18 +282,18 @@ std::vector<std::pair<int, int>> Hungarian::make_assignment()
 
 
 Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
-	: matrix_size{ std::max(dwarfs.size(), ores.size()) }
+	: ores_size{ std::max(dwarfs.size(), ores.size()) }, dwarfs_size{ dwarfs.size() }
 {
 	if (dwarfs.size() > ores.size())
 		throw std::runtime_error("Dimensions mismatch");
 
-	row_cov.resize(matrix_size, false);
-	col_cov.resize(matrix_size, false);
+	row_cov.resize(ores_size, false);
+	col_cov.resize(ores_size, false);
 
-	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
+	zeros_marks = create_matrix(ores_size, ZeroMark::notmarked);
 
 	float maxval = 0;
-	original_costs = create_matrix<float>(matrix_size,
+	original_costs = create_matrix<float>(ores_size,
 		[&](size_t row, size_t col) {
 			float val = (row < dwarfs.size())
 				? dwarfs[row].skills[ores[col].type]
@@ -292,7 +303,7 @@ Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
 			return val;
 		});
 
-	cost_matrix = create_matrix<float>(matrix_size,
+	cost_matrix = create_matrix<float>(ores_size,
 		[this, maxval](size_t row, size_t col) {
 			return maxval - this->original_costs[row][col];
 		});
@@ -301,15 +312,15 @@ Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
 
 Hungarian::Hungarian(const std::set<std::pair<size_t, size_t>> & initial_assignement,
 	const std::vector<dwarf_t> & dwarfs, const std::vector<mine_t> & ores)
-	: matrix_size{ std::max(dwarfs.size(), ores.size()) }
+	: ores_size{ std::max(dwarfs.size(), ores.size()) }, dwarfs_size { dwarfs.size() }
 {
-	row_cov.resize(matrix_size, false);
-	col_cov.resize(matrix_size, false);
+	row_cov.resize(ores_size, false);
+	col_cov.resize(ores_size, false);
 
-	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
+	zeros_marks = create_matrix(ores_size, ZeroMark::notmarked);
 
-	size_t n = matrix_size;
-	original_costs = create_matrix<float>(matrix_size,
+	size_t n = ores_size;
+	original_costs = create_matrix<float>(ores_size,
 		[&](size_t row, size_t col) {
 			std::set<std::pair<size_t, size_t>>::iterator it;
 			return (it = initial_assignement.find(std::make_pair(row, col))) == initial_assignement.end()
@@ -319,7 +330,7 @@ Hungarian::Hungarian(const std::set<std::pair<size_t, size_t>> & initial_assigne
 					: 0.f;
 		});
 
-	cost_matrix = create_matrix<float>(matrix_size,
+	cost_matrix = create_matrix<float>(ores_size,
 		[this](size_t row, size_t col) {
 			return this->original_costs[row][col];
 		});
@@ -327,19 +338,19 @@ Hungarian::Hungarian(const std::set<std::pair<size_t, size_t>> & initial_assigne
 }
 
 Hungarian::Hungarian(float matrix[], size_t size)
-	: matrix_size{ size }
+	: ores_size{ size }, dwarfs_size{ size }
 {
-	row_cov.resize(matrix_size, false);
-	col_cov.resize(matrix_size, false);
+	row_cov.resize(ores_size, false);
+	col_cov.resize(ores_size, false);
 
-	zeros_marks = create_matrix(matrix_size, ZeroMark::notmarked);
+	zeros_marks = create_matrix(ores_size, ZeroMark::notmarked);
 
-	original_costs = create_matrix<float>(matrix_size,
+	original_costs = create_matrix<float>(ores_size,
 		[matrix, size](size_t row, size_t col) {
 			return matrix[row * size + col];
 		});
 
-	cost_matrix = create_matrix<float>(matrix_size,
+	cost_matrix = create_matrix<float>(ores_size,
 		[this](size_t row, size_t col) {
 			return this->original_costs[row][col];
 		});
@@ -349,8 +360,8 @@ Hungarian::Hungarian(float matrix[], size_t size)
 std::set<std::pair<size_t, size_t>> Hungarian::get_zeros()
 {
 	std::set<std::pair<size_t, size_t>> zeros;
-	for (size_t row = 0; row < matrix_size; ++row)
-		for (size_t col = 0; col < matrix_size; ++col)
+	for (size_t row = 0; row < ores_size; ++row)
+		for (size_t col = 0; col < ores_size; ++col)
 			if (cost_matrix[row][col] == 0)
 				zeros.emplace(row, col);
 
@@ -368,13 +379,13 @@ float Hungarian::distance(std::pair<float, float> dwarf, std::pair<float, float>
 
 std::ostream& operator<< (std::ostream& os, Hungarian const& rhs)
 {
-	for (int i = 0; i < rhs.matrix_size; ++i)
+	for (int i = 0; i < rhs.ores_size; ++i)
 	{
-		for (int j = 0; j < rhs.matrix_size; ++j)
+		for (int j = 0; j < rhs.ores_size; ++j)
 			os << rhs.cost_matrix[i][j] << '\t';
 		os << '|';
 
-		for (int j = 0; j < rhs.matrix_size; ++j)
+		for (int j = 0; j < rhs.ores_size; ++j)
 			os << (rhs.zeros_marks[i][j] == ZeroMark::notmarked ? ' '
 				: rhs.zeros_marks[i][j] == ZeroMark::starred ? '*'
 				: '\'') << ' ';
