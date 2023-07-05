@@ -11,7 +11,8 @@
 
 class Hungarian
 {
-	size_t matrix_size;
+	size_t ores_size;
+	size_t dwarfs_size;
 
 	float** cost_matrix;
 	float** original_costs;
@@ -52,7 +53,7 @@ public:
 	std::vector<std::pair<int, int>> make_assignment();
 	std::vector<std::pair<int, int>> get_assignemnt();
 	float calc_cost() const;
-
+	std::vector<std::vector<float>> cost_matrix_to_vectors();
 	std::set<std::pair<size_t, size_t>> get_zeros();
 
 	Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores);
