@@ -238,29 +238,29 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f test\googletest\googletest\CMakeFiles\gtest_main.dir\build.make test/googletest/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-projekt.obj: projekt.cpp.obj
-.PHONY : projekt.obj
+brut-force.obj: brut-force.cpp.obj
+.PHONY : brut-force.obj
 
 # target to build an object file
-projekt.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/projekt.cpp.obj
-.PHONY : projekt.cpp.obj
+brut-force.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/brut-force.cpp.obj
+.PHONY : brut-force.cpp.obj
 
-projekt.i: projekt.cpp.i
-.PHONY : projekt.i
+brut-force.i: brut-force.cpp.i
+.PHONY : brut-force.i
 
 # target to preprocess a source file
-projekt.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/projekt.cpp.i
-.PHONY : projekt.cpp.i
+brut-force.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/brut-force.cpp.i
+.PHONY : brut-force.cpp.i
 
-projekt.s: projekt.cpp.s
-.PHONY : projekt.s
+brut-force.s: brut-force.cpp.s
+.PHONY : brut-force.s
 
 # target to generate assembly for a file
-projekt.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/projekt.cpp.s
-.PHONY : projekt.cpp.s
+brut-force.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Algorytmy-II.dir\build.make CMakeFiles/Algorytmy-II.dir/brut-force.cpp.s
+.PHONY : brut-force.cpp.s
 
 test/test_files/test.obj: test/test_files/test.cpp.obj
 .PHONY : test/test_files/test.obj
@@ -304,9 +304,9 @@ help:
 	@echo ... gtest
 	@echo ... gtest_main
 	@echo ... runTests
-	@echo ... projekt.obj
-	@echo ... projekt.i
-	@echo ... projekt.s
+	@echo ... brut-force.obj
+	@echo ... brut-force.i
+	@echo ... brut-force.s
 	@echo ... test/test_files/test.obj
 	@echo ... test/test_files/test.i
 	@echo ... test/test_files/test.s

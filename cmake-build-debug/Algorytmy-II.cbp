@@ -376,7 +376,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Algorytmy-II/projekt.cpp">
+		<Unit filename="D:/Algorytmy-II/brut-force.cpp">
 			<Option target="Algorytmy-II"/>
 		</Unit>
 		<Unit filename="D:/Algorytmy-II/test/googletest/googlemock/src/gmock-all.cc">

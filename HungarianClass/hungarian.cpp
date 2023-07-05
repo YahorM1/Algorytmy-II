@@ -274,7 +274,7 @@ Hungarian::Hungarian(std::vector<dwarf_t>& dwarfs, std::vector<mine_t>& ores)
 	: matrix_size{ std::max(dwarfs.size(), ores.size()) }
 {
 	if (dwarfs.size() > ores.size())
-		throw std::exception("Dimensions mismatch");
+		throw std::runtime_error("Dimensions mismatch");
 
 	row_cov.resize(matrix_size, false);
 	col_cov.resize(matrix_size, false);
